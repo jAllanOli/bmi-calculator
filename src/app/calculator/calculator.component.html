@@ -1,0 +1,90 @@
+<div>
+  <h3>Enter your details below</h3>
+
+  <div class="radio">
+    <label>
+      <input
+        type="radio"
+        name="measurement-unity"
+        id="unity"
+        value="metric"
+        checked
+        (change)="setUnity($event)"
+      />
+      Metric
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="measurement-unity"
+        id="unity"
+        value="imperial"
+        (change)="setUnity($event)"
+      />
+      Imperial
+    </label>
+  </div>
+
+  <div class="measurement-inputs" [ngSwitch]="unity">
+    <div *ngSwitchCase="'metric'">
+      <label for="height"
+        >Height
+        <input
+          id="height"
+          type="number"
+          placeholder="0"
+          [(ngModel)]="metricData.height"
+        />
+      </label>
+      <label for="weight"
+        >Weight
+        <input
+          id="weight"
+          type="number"
+          placeholder="0"
+          [(ngModel)]="metricData.weight"
+        />
+      </label>
+    </div>
+
+    <div *ngSwitchCase="'imperial'">
+      <label for="height"
+        >Height
+        <input
+          id="height"
+          type="number"
+          placeholder="0"
+          [(ngModel)]="imperialData.height.foots"
+        />
+        <input
+          id="height-inches"
+          type="number"
+          placeholder="0"
+          [(ngModel)]="imperialData.height.inches"
+        />
+      </label>
+      <label for="weight"
+        >Weight
+        <input id="weight" type="number" placeholder="0" />
+        <input id="weight-lbs" type="number" placeholder="0" />
+      </label>
+    </div>
+  </div>
+
+  <section [ngSwitch]="state">
+    <div *ngSwitchCase="'initial'">
+      <h3>Welcome!</h3>
+      <p>Enter your height and weight and you’ll see your BMI result here</p>
+    </div>
+    <div *ngSwitchCase="'result'">
+      <h3>
+        Your BMI is...
+        <span>{{ result }}</span>
+      </h3>
+      <p>
+        Your BMI suggests you're {{ classification }}. Your ideal weight is
+        between {{ range }}
+      </p>
+    </div>
+  </section>
+</div>
