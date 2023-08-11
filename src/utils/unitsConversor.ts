@@ -7,6 +7,10 @@ export class UnitsConversor {
     return value * 14;
   }
 
+  public poudsToStone(value: number): number {
+    return value / 14;
+  }
+
   public feetToInches(value: number): number {
     return value * 12;
   }

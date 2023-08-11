@@ -73,14 +73,14 @@
           id="weight"
           type="number"
           placeholder="0"
-          [(ngModel)]="imperialData.weight.pounds"
+          [(ngModel)]="imperialData.weight.stones"
           (blur)="calculate()"
         />
         <input
           id="weight-lbs"
           type="number"
           placeholder="0"
-          [(ngModel)]="imperialData.weight.stones"
+          [(ngModel)]="imperialData.weight.pounds"
           (blur)="calculate()"
         />
       </label>
@@ -99,7 +99,8 @@
       </h3>
       <p>
         Your BMI suggests you're {{ classification }}. Your ideal weight is
-        between <span>{{ metricRange.min }}kgs - {{ metricRange.max }}kgs</span>
+        between
+        <span>{{ unity === "metric" ? metricRange : imperialRange }}.</span>
       </p>
     </div>
   </section>

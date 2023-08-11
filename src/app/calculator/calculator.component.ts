@@ -25,7 +25,8 @@ export class CalculatorComponent {
   unity: Metric = 'metric';
 
   result!: string;
-  metricRange!: IdealWeightRange;
+  metricRange = '';
+  imperialRange = '';
 
   metricData: MetricMeasurement = {
     height: 0,
@@ -63,14 +64,31 @@ export class CalculatorComponent {
       this.imperialData.weight.stones > 0;
 
     if (hasMetricData) {
-      this.result = this.metricBMI(this.metricData);
-      this.metricRange = {
-        min: this.getWeight(this.metricData.height, HEALTHY_BMI.min).toFixed(1),
-        max: this.getWeight(this.metricData.height, HEALTHY_BMI.max).toFixed(1),
+      const weightRange = {
+        min: this.getMetricWeight(
+          this.metricData.height,
+          HEALTHY_BMI.min
+        ).toFixed(1),
+        max: this.getMetricWeight(
+          this.metricData.height,
+          HEALTHY_BMI.max
+        ).toFixed(1),
       };
+      this.result = this.metricBMI(this.metricData);
+      this.metricRange = `${weightRange.min}kgs - ${weightRange.max}kgs`;
       this.state = 'result';
     } else if (hasImperialData) {
       this.result = this.imperialBMI(this.imperialData);
+
+      const weightRange = {
+        min: this.conversor.poudsToStone(
+          this.getImperialWeight(this.imperialData, HEALTHY_BMI.min)
+        ),
+        max: this.conversor.poudsToStone(
+          this.getImperialWeight(this.imperialData, HEALTHY_BMI.max)
+        ),
+      };
+      console.log(weightRange);
       this.state = 'result';
     }
   }
@@ -88,10 +106,17 @@ export class CalculatorComponent {
     const totalWeight =
       data.weight.pounds + this.conversor.stoneToPounds(data.weight.stones);
 
-    return ((totalWeight / totalHeight ** 2) * CONVERSION_FACTOR).toFixed(2);
+    return ((totalWeight / totalHeight ** 2) * CONVERSION_FACTOR).toFixed(1);
   }
 
-  private getWeight(height: number, BMI: number): number {
+  private getMetricWeight(height: number, BMI: number): number {
     return BMI * this.conversor.cmToMeters(height) ** 2;
+  }
+
+  private getImperialWeight(data: ImperialMeasurement, BMI: number): number {
+    const totalHeight =
+      data.height.inches + this.conversor.feetToInches(data.height.feet);
+
+    return (BMI * CONVERSION_FACTOR ** 2) / totalHeight;
   }
 }
