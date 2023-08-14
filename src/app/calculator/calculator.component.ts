@@ -2,13 +2,12 @@ import { Component } from '@angular/core';
 import { UnitsConversor } from '../../utils/unitsConversor';
 import {
   State,
-  Metric,
-  IdealWeightRange,
   MetricMeasurement,
   ImperialMeasurement,
+  Unity,
 } from 'src/types';
 
-const HEALTHY_BMI = {
+export const HEALTHY_BMI = {
   min: 18.5,
   max: 24.9,
 };
@@ -22,7 +21,7 @@ const CONVERSION_FACTOR = 703;
 })
 export class CalculatorComponent {
   state: State = 'initial';
-  unity: Metric = 'metric';
+  unity: Unity = 'metric';
 
   result!: string;
   metricRange = '';
@@ -50,7 +49,7 @@ export class CalculatorComponent {
 
   public setUnity(event: Event) {
     const input = event.target as HTMLInputElement;
-    this.unity = input.value as Metric;
+    this.unity = input.value as Unity;
   }
 
   public calculate() {
@@ -74,49 +73,47 @@ export class CalculatorComponent {
           HEALTHY_BMI.max
         ).toFixed(1),
       };
-      this.result = this.metricBMI(this.metricData);
+      this.result = this.metricBMI(this.metricData).toFixed(1);
       this.metricRange = `${weightRange.min}kgs - ${weightRange.max}kgs`;
       this.state = 'result';
     } else if (hasImperialData) {
-      this.result = this.imperialBMI(this.imperialData);
+      this.result = this.imperialBMI(this.imperialData).toFixed(1);
 
       const weightRange = {
-        min: this.conversor.poudsToStone(
-          this.getImperialWeight(this.imperialData, HEALTHY_BMI.min)
-        ),
-        max: this.conversor.poudsToStone(
-          this.getImperialWeight(this.imperialData, HEALTHY_BMI.max)
-        ),
+        min: this.getImperialWeight(this.imperialData, HEALTHY_BMI.min),
+        max: this.getImperialWeight(this.imperialData, HEALTHY_BMI.max),
       };
-      console.log(weightRange);
+
+      this.imperialRange = `${weightRange.min.stones.result}st ${weightRange.min.stones.rest}lbs - ${weightRange.max.stones.result}st ${weightRange.max.stones.rest}lbs`;
       this.state = 'result';
     }
   }
 
-  private metricBMI(data: MetricMeasurement): string {
-    return (data.weight / this.conversor.cmToMeters(data.height) ** 2).toFixed(
-      1
-    );
+  public getMetricWeight(height: number, BMI: number): number {
+    return BMI * this.conversor.cmToMeters(height) ** 2;
   }
 
-  private imperialBMI(data: ImperialMeasurement): string {
+  public getImperialWeight(data: ImperialMeasurement, BMI: number) {
+    const totalHeight =
+      data.height.inches + this.conversor.feetToInches(data.height.feet);
+
+    const result = (BMI * totalHeight ** 2) / CONVERSION_FACTOR;
+    const stones = this.conversor.poudsToStone(Math.floor(result));
+
+    return { result, stones };
+  }
+
+  private metricBMI(data: MetricMeasurement): number {
+    return data.weight / this.conversor.cmToMeters(data.height) ** 2;
+  }
+
+  private imperialBMI(data: ImperialMeasurement): number {
     const totalHeight =
       data.height.inches + this.conversor.feetToInches(data.height.feet);
 
     const totalWeight =
       data.weight.pounds + this.conversor.stoneToPounds(data.weight.stones);
 
-    return ((totalWeight / totalHeight ** 2) * CONVERSION_FACTOR).toFixed(1);
-  }
-
-  private getMetricWeight(height: number, BMI: number): number {
-    return BMI * this.conversor.cmToMeters(height) ** 2;
-  }
-
-  private getImperialWeight(data: ImperialMeasurement, BMI: number): number {
-    const totalHeight =
-      data.height.inches + this.conversor.feetToInches(data.height.feet);
-
-    return (BMI * CONVERSION_FACTOR ** 2) / totalHeight;
+    return (totalWeight / totalHeight ** 2) * CONVERSION_FACTOR;
   }
 }

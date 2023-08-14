@@ -1,4 +1,4 @@
-<div>
+<div data-testid="inputs-container">
   <h3>Enter your details below</h3>
 
   <div class="radio">
@@ -9,6 +9,7 @@
         id="unity"
         value="metric"
         checked
+        data-testid="metric-setter"
         (change)="setUnity($event)"
       />
       Metric
@@ -19,6 +20,7 @@
         name="measurement-unity"
         id="unity"
         value="imperial"
+        data-testid="imperial-setter"
         (change)="setUnity($event)"
       />
       Imperial
@@ -26,11 +28,12 @@
   </div>
 
   <div class="measurement-inputs" [ngSwitch]="unity">
-    <div *ngSwitchCase="'metric'">
+    <div *ngSwitchCase="'metric'" data-testid="metric-inputs">
       <label for="height"
         >Height
         <input
           id="height"
+          data-testid="metric-height-input"
           type="number"
           placeholder="0"
           [(ngModel)]="metricData.height"
@@ -41,6 +44,7 @@
         >Weight
         <input
           id="weight"
+          data-testid="metric-weight-input"
           type="number"
           placeholder="0"
           [(ngModel)]="metricData.weight"
@@ -49,11 +53,12 @@
       </label>
     </div>
 
-    <div *ngSwitchCase="'imperial'">
+    <div *ngSwitchCase="'imperial'" data-testid="imperial-inputs">
       <label for="height"
         >Height
         <input
           id="height"
+          data-testid="feet-input"
           type="number"
           placeholder="0"
           [(ngModel)]="imperialData.height.feet"
@@ -61,6 +66,7 @@
         />
         <input
           id="height-inches"
+          data-testid="inches-input"
           type="number"
           placeholder="0"
           [(ngModel)]="imperialData.height.inches"
@@ -71,6 +77,7 @@
         >Weight
         <input
           id="weight"
+          data-testid="stones-input"
           type="number"
           placeholder="0"
           [(ngModel)]="imperialData.weight.stones"
@@ -78,6 +85,7 @@
         />
         <input
           id="weight-lbs"
+          data-testid="pounds-input"
           type="number"
           placeholder="0"
           [(ngModel)]="imperialData.weight.pounds"

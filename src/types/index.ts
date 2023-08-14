@@ -1,6 +1,6 @@
 export type State = 'initial' | 'result';
 
-export type Metric = 'metric' | 'imperial';
+export type Unity = 'metric' | 'imperial';
 
 export type MetricMeasurement = {
   height: number;
