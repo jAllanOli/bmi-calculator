@@ -1,1 +1,38 @@
 @import "../styles/index.scss";
+
+.gradient-wrapper {
+  text-align: center;
+  padding: 2rem 1.5rem 13.6rem;
+  border-radius: 0rem 0rem 2.1875rem 2.1875rem;
+  background: var(
+    --gradient-1,
+    linear-gradient(315deg, #d6e6fe 0%, rgba(214, 252, 254, 0) 100%)
+  );
+
+  & header > img {
+    max-width: 2.5rem;
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+
+    h1 {
+      @include heading-l;
+      font-weight: 600;
+      color: $gunmetal;
+      letter-spacing: -2.4px;
+    }
+
+    p {
+      @include body-m;
+      color: $dark-eletric-blue;
+    }
+  }
+}
+
+.inputs-area {
+  padding: 0 1.5rem;
+}

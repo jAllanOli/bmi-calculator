@@ -1,0 +1,176 @@
+@import "../../styles/index.scss";
+
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  margin-top: -175px;
+  border-radius: 1rem;
+
+  background-color: $pure-white;
+
+  h3 {
+    color: $gunmetal;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.075rem;
+  }
+
+  .radio {
+    width: 100%;
+    display: flex;
+    gap: 3.3rem;
+
+    &__label {
+      display: flex;
+      align-items: center;
+      gap: 1.12rem;
+
+      @include body-m-bold;
+      color: $gunmetal;
+
+      input {
+        appearance: none;
+        background-color: $pure-white;
+        width: 1.9375rem;
+        height: 1.9375rem;
+        border-radius: 50%;
+        border: 1px solid $borders;
+        transition: all 250ms ease-in-out;
+
+        &:checked {
+          border: 8px solid $borders;
+          background-color: $blue;
+        }
+
+        &:not(:checked):hover {
+          border: 1.5px solid $blue;
+          background-color: $pure-white;
+        }
+      }
+    }
+  }
+
+  .metric-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .height::after {
+      content: "cm";
+    }
+
+    .weight::after {
+      content: "kg";
+    }
+  }
+
+  .imperial-inputs {
+    .flex-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+      justify-content: space-between;
+
+      .label {
+        max-width: 45%;
+      }
+    }
+
+    .feet::after {
+      content: "ft";
+    }
+
+    .inches::after {
+      content: "in";
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .stones::after {
+      content: "st";
+    }
+
+    .pounds::after {
+      content: "lbs";
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: $dark-eletric-blue;
+  position: relative;
+  @include body-s;
+
+  &::after {
+    color: $blue;
+    position: absolute;
+    top: 53.5%;
+    right: 1.5rem;
+    font-family: Inter Semibold;
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: -0.075rem;
+  }
+
+  .value-input {
+    padding: 1.25rem 1.5rem;
+    border: 1px solid $borders;
+    border-radius: 0.75rem;
+    font-size: 1.5rem;
+    font-family: Inter Semibold;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.075rem;
+    color: $gunmetal;
+
+    &:focus {
+      outline: none;
+      border: 1.5px solid $blue;
+    }
+  }
+}
+
+.result-container {
+  padding: 2rem;
+  background: linear-gradient(90deg, #345ff6 0%, #587dff 100%);
+  border-radius: 1rem;
+  h3,
+  p,
+  span {
+    color: $pure-white;
+  }
+
+  .result {
+    display: flex;
+    flex-direction: column;
+
+    &__intro {
+      font-family: Inter Semibold;
+      font-weight: 600;
+      line-height: 150%;
+      margin-bottom: 0.5rem;
+    }
+
+    &__value {
+      font-size: 3rem;
+      line-height: 110%;
+      letter-spacing: -0.15rem;
+      font-family: Inter Semibold;
+    }
+
+    &__desc {
+      font-size: 0.875rem;
+
+      .range-value {
+        font-family: Inter Semibold;
+      }
+    }
+  }
+}

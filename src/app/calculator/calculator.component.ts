@@ -50,6 +50,7 @@ export class CalculatorComponent {
   public setUnity(event: Event) {
     const input = event.target as HTMLInputElement;
     this.unity = input.value as Unity;
+    this.state = 'initial';
   }
 
   public calculate() {
@@ -73,11 +74,15 @@ export class CalculatorComponent {
           HEALTHY_BMI.max
         ).toFixed(1),
       };
-      this.result = this.metricBMI(this.metricData).toFixed(1);
+      const BMI = this.metricBMI(this.metricData);
+      this.result = BMI.toFixed(1);
+      this.classification = this.verifyClassification(BMI);
       this.metricRange = `${weightRange.min}kgs - ${weightRange.max}kgs`;
       this.state = 'result';
     } else if (hasImperialData) {
-      this.result = this.imperialBMI(this.imperialData).toFixed(1);
+      const BMI = this.imperialBMI(this.imperialData);
+      this.classification = this.verifyClassification(BMI);
+      this.result = BMI.toFixed(1);
 
       const weightRange = {
         min: this.getImperialWeight(this.imperialData, HEALTHY_BMI.min),
@@ -101,6 +106,28 @@ export class CalculatorComponent {
     const stones = this.conversor.poudsToStone(Math.floor(result));
 
     return { result, stones };
+  }
+
+  public verifyClassification(BMI: number): string {
+    let classification = '';
+
+    if (BMI < 18.5) {
+      classification = 'Underweight';
+    }
+
+    if (BMI > 18.5 && BMI < 24.9) {
+      classification = 'Healthy Weight';
+    }
+
+    if (BMI > 25 && BMI < 29.9) {
+      classification = 'Overweight';
+    }
+
+    if (BMI > 30) {
+      classification = 'Obesity';
+    }
+
+    return classification;
   }
 
   private metricBMI(data: MetricMeasurement): number {

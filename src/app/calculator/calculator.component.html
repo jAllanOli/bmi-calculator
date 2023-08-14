@@ -1,8 +1,8 @@
-<div data-testid="inputs-container">
+<div class="inputs-container" data-testid="inputs-container">
   <h3>Enter your details below</h3>
 
   <div class="radio">
-    <label>
+    <label class="radio__label">
       <input
         type="radio"
         name="measurement-unity"
@@ -14,7 +14,7 @@
       />
       Metric
     </label>
-    <label>
+    <label class="radio__label">
       <input
         type="radio"
         name="measurement-unity"
@@ -28,11 +28,16 @@
   </div>
 
   <div class="measurement-inputs" [ngSwitch]="unity">
-    <div *ngSwitchCase="'metric'" data-testid="metric-inputs">
-      <label for="height"
+    <div
+      *ngSwitchCase="'metric'"
+      data-testid="metric-inputs"
+      class="metric-inputs"
+    >
+      <label class="label height" for="height"
         >Height
         <input
           id="height"
+          class="value-input"
           data-testid="metric-height-input"
           type="number"
           placeholder="0"
@@ -40,10 +45,11 @@
           (blur)="calculate()"
         />
       </label>
-      <label for="weight"
+      <label class="label weight" for="weight"
         >Weight
         <input
           id="weight"
+          class="value-input"
           data-testid="metric-weight-input"
           type="number"
           placeholder="0"
@@ -53,62 +59,79 @@
       </label>
     </div>
 
-    <div *ngSwitchCase="'imperial'" data-testid="imperial-inputs">
-      <label for="height"
-        >Height
-        <input
-          id="height"
-          data-testid="feet-input"
-          type="number"
-          placeholder="0"
-          [(ngModel)]="imperialData.height.feet"
-          (blur)="calculate()"
-        />
-        <input
-          id="height-inches"
-          data-testid="inches-input"
-          type="number"
-          placeholder="0"
-          [(ngModel)]="imperialData.height.inches"
-          (blur)="calculate()"
-        />
-      </label>
-      <label for="weight"
-        >Weight
-        <input
-          id="weight"
-          data-testid="stones-input"
-          type="number"
-          placeholder="0"
-          [(ngModel)]="imperialData.weight.stones"
-          (blur)="calculate()"
-        />
-        <input
-          id="weight-lbs"
-          data-testid="pounds-input"
-          type="number"
-          placeholder="0"
-          [(ngModel)]="imperialData.weight.pounds"
-          (blur)="calculate()"
-        />
-      </label>
+    <div
+      *ngSwitchCase="'imperial'"
+      class="imperial-inputs"
+      data-testid="imperial-inputs"
+    >
+      <div class="flex-container">
+        <label class="label feet" for="height"
+          >Height
+          <input
+            id="height"
+            class="value-input"
+            data-testid="feet-input"
+            type="number"
+            placeholder="0"
+            [(ngModel)]="imperialData.height.feet"
+            (blur)="calculate()"
+          />
+        </label>
+        <label class="label inches" for="height-inches">
+          <input
+            id="height-inches"
+            class="value-input"
+            data-testid="inches-input"
+            type="number"
+            placeholder="0"
+            [(ngModel)]="imperialData.height.inches"
+            (blur)="calculate()"
+          />
+        </label>
+      </div>
+
+      <div class="flex-container">
+        <label class="label stones" for="weight"
+          >Weight
+          <input
+            id="weight"
+            class="value-input"
+            data-testid="stones-input"
+            type="number"
+            placeholder="0"
+            [(ngModel)]="imperialData.weight.stones"
+            (blur)="calculate()"
+          />
+        </label>
+        <label class="label pounds" for="weight-lbs">
+          <input
+            id="weight-lbs"
+            class="value-input"
+            data-testid="pounds-input"
+            type="number"
+            placeholder="0"
+            [(ngModel)]="imperialData.weight.pounds"
+            (blur)="calculate()"
+          />
+        </label>
+      </div>
     </div>
   </div>
 
-  <section [ngSwitch]="state">
+  <section [ngSwitch]="state" class="result-container">
     <div *ngSwitchCase="'initial'">
       <h3>Welcome!</h3>
       <p>Enter your height and weight and you’ll see your BMI result here</p>
     </div>
-    <div *ngSwitchCase="'result'">
-      <h3>
-        Your BMI is...
-        <span>{{ result }}</span>
-      </h3>
-      <p>
-        Your BMI suggests you're {{ classification }}. Your ideal weight is
+    <div class="result" *ngSwitchCase="'result'">
+      <p class="result__intro">Your BMI is...</p>
+      <span class="result__value">{{ result }}</span>
+      <p class="result__desc">
+        Your BMI suggests you're at {{ classification }}. Your ideal weight is
         between
-        <span>{{ unity === "metric" ? metricRange : imperialRange }}.</span>
+        <span class="range-value"
+          >{{ unity === "metric" ? metricRange : imperialRange }}.</span
+        >
       </p>
     </div>
   </section>
