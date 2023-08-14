@@ -31,7 +31,7 @@
     <div
       *ngSwitchCase="'metric'"
       data-testid="metric-inputs"
-      class="metric-inputs"
+      class="metric-inputs appear-animation"
     >
       <label class="label height" for="height"
         >Height
@@ -39,7 +39,7 @@
           id="height"
           class="value-input"
           data-testid="metric-height-input"
-          type="number"
+          type="text"
           placeholder="0"
           [(ngModel)]="metricData.height"
           (blur)="calculate()"
@@ -51,7 +51,7 @@
           id="weight"
           class="value-input"
           data-testid="metric-weight-input"
-          type="number"
+          type="text"
           placeholder="0"
           [(ngModel)]="metricData.weight"
           (blur)="calculate()"
@@ -61,7 +61,7 @@
 
     <div
       *ngSwitchCase="'imperial'"
-      class="imperial-inputs"
+      class="imperial-inputs appear-animation"
       data-testid="imperial-inputs"
     >
       <div class="flex-container">
@@ -71,7 +71,7 @@
             id="height"
             class="value-input"
             data-testid="feet-input"
-            type="number"
+            type="text"
             placeholder="0"
             [(ngModel)]="imperialData.height.feet"
             (blur)="calculate()"
@@ -82,7 +82,7 @@
             id="height-inches"
             class="value-input"
             data-testid="inches-input"
-            type="number"
+            type="text"
             placeholder="0"
             [(ngModel)]="imperialData.height.inches"
             (blur)="calculate()"
@@ -97,7 +97,7 @@
             id="weight"
             class="value-input"
             data-testid="stones-input"
-            type="number"
+            type="text"
             placeholder="0"
             [(ngModel)]="imperialData.weight.stones"
             (blur)="calculate()"
@@ -108,7 +108,7 @@
             id="weight-lbs"
             class="value-input"
             data-testid="pounds-input"
-            type="number"
+            type="text"
             placeholder="0"
             [(ngModel)]="imperialData.weight.pounds"
             (blur)="calculate()"
