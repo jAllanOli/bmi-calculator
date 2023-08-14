@@ -124,8 +124,10 @@
       <p>Enter your height and weight and you’ll see your BMI result here</p>
     </div>
     <div class="result" *ngSwitchCase="'result'">
-      <p class="result__intro">Your BMI is...</p>
-      <span class="result__value">{{ result }}</span>
+      <div class="result__header">
+        <p class="result__intro">Your BMI is...</p>
+        <span class="result__value">{{ result }}</span>
+      </div>
       <p class="result__desc">
         Your BMI suggests you're at {{ classification }}. Your ideal weight is
         between

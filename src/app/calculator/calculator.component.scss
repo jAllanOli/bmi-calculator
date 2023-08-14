@@ -11,6 +11,10 @@
   background-color: $pure-white;
   box-shadow: 16px 32px 56px 0px rgba(143, 174, 207, 0.25);
 
+  @media (min-width: 760px) {
+    margin-top: -290px;
+  }
+
   h3 {
     color: $gunmetal;
     font-size: 1.5rem;
@@ -22,6 +26,10 @@
     width: 100%;
     display: flex;
     gap: 3.3rem;
+
+    @media (min-width: 760px) {
+      gap: 15.2rem;
+    }
 
     &__label {
       display: flex;
@@ -58,12 +66,22 @@
     flex-direction: column;
     gap: 1rem;
 
+    @media (min-width: 760px) {
+      flex-direction: row;
+    }
+
     .height::after {
       content: "cm";
     }
 
     .weight::after {
       content: "kg";
+    }
+
+    .label {
+      @media (min-width: 760px) {
+        max-width: 48.7%;
+      }
     }
   }
 
@@ -156,9 +174,20 @@
     color: $pure-white;
   }
 
+  @media (min-width: 760px) {
+    border-top-right-radius: 5rem;
+    border-bottom-right-radius: 5rem;
+  }
+
   .result {
     display: flex;
     flex-direction: column;
+
+    @media (min-width: 760px) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
 
     &__intro {
       font-family: Inter Semibold;
@@ -176,6 +205,7 @@
 
     &__desc {
       font-size: 0.875rem;
+      width: 50%;
 
       .range-value {
         font-family: Inter Semibold;
