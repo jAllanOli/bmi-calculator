@@ -13,6 +13,12 @@
     padding: 2rem 2.69rem 20.37rem 2.44rem;
   }
 
+  @media (min-width: 1440px) {
+    text-align: left;
+    padding: 4.7rem 18.63rem 12.25rem 7.25rem;
+    max-width: 70%;
+  }
+
   & header > img {
     max-width: 2.5rem;
   }
@@ -23,6 +29,10 @@
     gap: 1.5rem;
     padding-top: 1.5rem;
 
+    @media (min-width: 1440px) {
+      padding-top: 8.19rem;
+    }
+
     h1 {
       @include heading-l;
       font-weight: 600;
@@ -31,6 +41,12 @@
 
       @media (min-width: 760px) {
         padding: 0 10.5rem;
+      }
+
+      @media (min-width: 1440px) {
+        padding: 0;
+        padding-right: 5.5rem;
+        @include heading-xl;
       }
     }
 
@@ -43,6 +59,13 @@
 
 .inputs-area {
   padding: 0 1.5rem;
+
+  @media (min-width: 1440px) {
+    max-width: 36rem;
+    position: absolute;
+    top: 11.3rem;
+    right: 6.5%;
+  }
 }
 
 .result-explanation {
@@ -55,12 +78,25 @@
     flex-direction: row;
   }
 
+  @media (min-width: 1440px) {
+    margin-top: 0;
+    padding-top: 4.1rem;
+    background: url(../assets/images/pattern-curved-line-left.svg) no-repeat top
+      right 10.44rem;
+    align-items: flex-end;
+  }
+
   img {
     width: 100%;
 
     @media (min-width: 760px) {
       margin-left: -10%;
       max-width: 50%;
+    }
+
+    @media (min-width: 1440px) {
+      margin: 0;
+      padding: 0 7.25rem 0;
     }
   }
 
@@ -70,11 +106,20 @@
     gap: 2rem;
     padding: 3rem 2.7rem 4.5rem 4.7rem;
 
+    @media (min-width: 1440px) {
+      padding: 0 10rem 2rem 0.8rem;
+    }
+
     h2 {
       font-size: 2rem;
       line-height: 110%;
       letter-spacing: -0.1rem;
       color: $gunmetal;
+
+      @media (min-width: 1440px) {
+        font-size: 3rem;
+        letter-spacing: -0.15rem;
+      }
     }
 
     p {
@@ -103,6 +148,13 @@
     padding: 3.75rem 2.69rem 3.75rem 2.44rem;
   }
 
+  @media (min-width: 1440px) {
+    flex-direction: row;
+    padding: 4.5rem 7.3rem 6rem 7.3rem;
+    gap: 2rem;
+    margin-top: 6rem;
+  }
+
   &__item {
     display: flex;
     flex-direction: column;
@@ -112,6 +164,11 @@
     @media (min-width: 760px) {
       flex-direction: row;
       align-items: center;
+    }
+
+    @media (min-width: 1440px) {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 
@@ -150,17 +207,32 @@
     padding-right: 2.69;
   }
 
-  & > h2 {
+  @media (min-width: 1440px) {
+    background: url(../assets/images/pattern-curved-line-right.svg) no-repeat
+      left 20rem top 18rem;
+    text-align: left;
+    padding: 4.5rem 8.75rem 6rem 6rem;
+  }
+
+  &__text {
+    max-width: 36rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+  }
+
+  &__text > h2 {
     font-size: 2rem;
     line-height: 110%;
     letter-spacing: -0.1rem;
     color: $gunmetal;
   }
 
-  & > p {
+  &__text > p {
     margin-bottom: 1.5rem;
     line-height: 150%;
     color: $dark-eletric-blue;
+    padding-right: 1rem;
   }
 
   .cards-grid {
@@ -170,6 +242,13 @@
 
     @media (min-width: 760px) {
       grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (min-width: 1440px) {
+      grid-template-columns: repeat(15, 1fr);
+      max-width: 75%;
+      align-self: flex-end;
+      margin-top: -14rem;
     }
   }
 
@@ -205,6 +284,32 @@
 
       &:nth-child(5) {
         grid-column: 2 / 4;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      gap: 2rem;
+      box-shadow: 16px 32px 56px 0px rgba(143, 174, 207, 0.25);
+      min-height: 12rem;
+
+      &:nth-child(1) {
+        grid-column: 9 / 15;
+      }
+
+      &:nth-child(2) {
+        grid-column: 4 / 10;
+      }
+
+      &:nth-child(3) {
+        grid-column: 10 / 16;
+      }
+
+      &:nth-child(4) {
+        grid-column: 1 / 7;
+      }
+
+      &:nth-child(5) {
+        grid-column: 7 / 13;
       }
     }
 

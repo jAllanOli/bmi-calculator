@@ -15,6 +15,10 @@
     margin-top: -290px;
   }
 
+  @media (min-width: 1024px) {
+    margin-top: 0;
+  }
+
   h3 {
     color: $gunmetal;
     font-size: 1.5rem;
@@ -29,6 +33,9 @@
 
     @media (min-width: 760px) {
       gap: 15.2rem;
+    }
+    @media (min-width: 1024px) {
+      gap: 9.6rem;
     }
 
     &__label {
@@ -156,10 +163,19 @@
     line-height: normal;
     letter-spacing: -0.075rem;
     color: $gunmetal;
+    transition: all 500ms ease-in-out;
 
     &:focus {
       outline: none;
       border: 1.5px solid $blue;
+      background: var(
+        --gradient-1,
+        linear-gradient(315deg, #d6e6fe 0%, rgba(214, 252, 254, 0) 100%)
+      );
+    }
+
+    &:hover {
+      border: 1px solid $blue;
     }
   }
 }
